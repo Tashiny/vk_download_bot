@@ -2,13 +2,15 @@ services:
   - type: web
     name: vk-video-bot
     env: python
-    buildCommand: pip install -r requirements.txt
+    runtime: python
+    plan: free
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: python vk_video_bot.py
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: BOT_TOKEN
         sync: false
       - key: WEBHOOK_URL
         sync: false
-      - key: PORT
-        value: 10000
     healthCheckPath: /health
